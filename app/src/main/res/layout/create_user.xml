@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add new Beer:"
+        android:textSize="24sp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/beer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Beer Name"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/brewery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Brewery Name"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/alc_percentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Alcohol percentage"/>
+
+        <Button
+            android:text="Save Beer"
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
