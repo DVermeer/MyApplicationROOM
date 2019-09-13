@@ -28,6 +28,12 @@
         android:layout_height="wrap_content"
         android:hint="Alcohol percentage"/>
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/new_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount in Stock"/>
+
         <Button
             android:text="Save Beer"
             android:id="@+id/button"

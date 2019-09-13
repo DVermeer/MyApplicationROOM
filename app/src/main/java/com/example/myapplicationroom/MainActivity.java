@@ -10,13 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recylcerview;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-    ArrayList<String> beers;
+    Button btnDrink;
+//    ArrayList<Beer> beers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,24 +41,34 @@ public class MainActivity extends AppCompatActivity {
 
         recylcerview = findViewById(R.id.recycler_view);
 
-        beers = new ArrayList<>();
-        for (int i = 0; i < 100 ; i++) {
-            beers.add("Grimbergen # " + i);
-                    }
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+        List<Beer> beers = db.beerDao().getAllBeers();
 
         recylcerview.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(beers);
         recylcerview.setAdapter(adapter);
 
+        btnDrink = findViewById(R.id.btnDrink);
         fab = findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CreateUser.class));
+                startActivity(new Intent(MainActivity.this, CreateBeer.class));
 
             }
         });
 
+        /* TODO, add onclick listener for Drink button */
+
+//        btnDrink.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getApplicationContext(), "Cheers", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 }
