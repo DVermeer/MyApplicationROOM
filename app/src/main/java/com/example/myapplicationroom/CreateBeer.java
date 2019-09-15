@@ -42,7 +42,6 @@ public class CreateBeer extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Save to database
                 Log.d(TAG, "Onclick: beerName: " + beer_name.getText().toString());
                 Beer beer = new Beer(beer_name.getText().toString(), brewery.getText().toString(), alc_percentage.getText().toString(), new_amount.getText().toString());
                 db.beerDao().insertALL(beer);
