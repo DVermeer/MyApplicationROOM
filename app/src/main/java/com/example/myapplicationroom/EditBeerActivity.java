@@ -14,7 +14,7 @@ import static java.lang.Integer.*;
 
 public class EditBeerActivity extends AppCompatActivity {
 
-    //TextView beerstock;
+    TextView beerstock;
 
     private static final String TAG = "EditBeerActivity";
 

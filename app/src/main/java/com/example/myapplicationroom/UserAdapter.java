@@ -54,10 +54,10 @@ class UserAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<User
 
         public ViewHolder(@NonNull View itemView, OnBeerListener onBeerListener) {
             super(itemView);
-            beerName = itemView.findViewById(R.id.beer_name);
-            brewery = itemView.findViewById(R.id.brewery);
-            alc_percentage = itemView.findViewById(R.id.alc_percentage);
-            amount = itemView.findViewById(R.id.amount);
+            this.beerName = itemView.findViewById(R.id.beer_name);
+            this.brewery = itemView.findViewById(R.id.brewery);
+            this.alc_percentage = itemView.findViewById(R.id.alc_percentage);
+            this.amount = itemView.findViewById(R.id.amount);
             this.onBeerListener = onBeerListener;
 
             itemView.setOnClickListener(this);
