@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -29,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
     RecyclerView recylcerview;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-    Button btnDrink;
-    ArrayList<Beer> beers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +43,13 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
-        List<Beer> beers = db.beerDao().getAllBeers();
+        List<Beer> beers;
+        beers = db.beerDao().getAllBeers();
 
         recylcerview.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(beers, this);
         recylcerview.setAdapter(adapter);
 
-        btnDrink = findViewById(R.id.btnDrink);
         fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +64,11 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
     public void onBeerClick(int position) {
         Toast.makeText(getApplicationContext(), "Cheers", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent ( MainActivity.this, EditBeerActivity.class);
+
+        // ToDo String for beer name
+        //String
         String i_beer = position + "";
         intent.putExtra("beer_name", i_beer);
-
         startActivity(intent);
 
     }
