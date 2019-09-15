@@ -22,7 +22,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UserAdapter.OnBeerListener {
 
     private static final String TAG = "MainActivity";
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
     Button btnDrink;
-//    ArrayList<Beer> beers;
+    ArrayList<Beer> beers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         List<Beer> beers = db.beerDao().getAllBeers();
 
         recylcerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserAdapter(beers);
+        adapter = new UserAdapter(beers, this);
         recylcerview.setAdapter(adapter);
 
         btnDrink = findViewById(R.id.btnDrink);
@@ -57,18 +57,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, CreateBeer.class));
-
             }
         });
+    }
 
-        /* TODO, add onclick listener for Drink button */
+    @Override
+    public void onBeerClick(int position) {
+        Toast.makeText(getApplicationContext(), "Cheers", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent ( MainActivity.this, EditBeerActivity.class);
+        String i_beer = position + "";
+        intent.putExtra("beer_name", i_beer);
 
-//        btnDrink.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(), "Cheers", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        startActivity(intent);
 
     }
 }
