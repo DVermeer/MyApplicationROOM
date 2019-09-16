@@ -9,12 +9,17 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
+import java.util.List;
+
 import static java.lang.Integer.*;
 
 
 public class EditBeerActivity extends AppCompatActivity {
 
     TextView beerstock;
+    //AppDatabase db;
 
     private static final String TAG = "EditBeerActivity";
 
@@ -23,11 +28,21 @@ public class EditBeerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbeer);
 
+        // ToDo Call database here, but should me implemented in Appdatabase //
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+        List<Beer> beers = db.beerDao().getAllBeers();
+
         Log.d(TAG, "onCreate: Called");
         if (getIntent().hasExtra("beer_name")) {
-            String beer_name = getIntent().getStringExtra("beer_name");
-            setBeernaam(beer_name);
-        }
+            String beer_index = getIntent().getStringExtra("beer_name");
+            int beer_ind = parseInt(beer_index);
+            Beer beer_selected = beers.get(beer_ind);
+            String beer_name = beer_selected.getBeerName();
+            String beer_stock = beer_selected.getAmount();
+            setBeernaam(beer_name, beer_stock);
+
 
         Button btnDrink = findViewById(R.id.btnDrink);
         final TextView beerstock = findViewById(R.id.beerstock);
@@ -44,6 +59,8 @@ public class EditBeerActivity extends AppCompatActivity {
                     stock_num = stock_num -1 ;
                     String stock_newtext = stock_num + "";
                     beerstock.setText(stock_newtext);
+                    Toast.makeText(getApplicationContext(), "Cheers, enjoy your beer", Toast.LENGTH_SHORT).show();
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Out of stock :( Please buy some new one", Toast.LENGTH_SHORT).show();
@@ -51,12 +68,18 @@ public class EditBeerActivity extends AppCompatActivity {
                 }
             }
         });
+        String stock_newtext = beerstock.getText().toString();
+        beer_selected.setAmount(stock_newtext);
+
+        }
     }
 
-    public void setBeernaam(String beer_name){
+    public void setBeernaam(String beer_name, String beer_stock){
         TextView name = findViewById(R.id.beer_name);
+        TextView stock = findViewById(R.id.beerstock);
                 name.setText(beer_name);
-        //Toast.makeText(getApplicationContext(), "Cheers: " + beer_name, Toast.LENGTH_SHORT).show();
+                stock.setText(beer_stock);
+
     }
 
 }

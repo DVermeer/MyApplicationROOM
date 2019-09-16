@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +44,7 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
-        List<Beer> beers;
-        beers = db.beerDao().getAllBeers();
+        List<Beer> beers = db.beerDao().getAllBeers();
 
         recylcerview.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(beers, this);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
         Intent intent = new Intent ( MainActivity.this, EditBeerActivity.class);
 
         // ToDo String for beer name
-        //String
+//        String beer_Name = beerName;
         String i_beer = position + "";
         intent.putExtra("beer_name", i_beer);
         startActivity(intent);
