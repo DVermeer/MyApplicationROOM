@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     android:weightSum="100">
 
     <TextView
         android:id="@+id/beer_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
+        android:layout_weight="50"
         android:text="BeerNaam"
-        android:textSize="28sp"/>
+        android:textSize="28sp" />
 
     <TextView
         android:id="@+id/beerstock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="15"
         android:layout_marginTop="15dp"
+        android:layout_weight="15"
         android:text="9"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnDrink"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="35"
         android:layout_marginTop="15dp"
+        android:layout_weight="35"
         android:text="Drink"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </LinearLayout>
