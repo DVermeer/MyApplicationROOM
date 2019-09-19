@@ -10,6 +10,33 @@
         android:layout_height="wrap_content"
         android:text="Add new Beer:"
         android:textSize="24sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/EAN_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="EAN Barcode- not finished"/>
+        <Button
+        android:text="Check EAN"
+        android:id="@+id/checkEAN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+        <Button
+            android:text="SCAN EAN"
+            android:id="@+id/SCAN_EAN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/beer_name"
@@ -33,6 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Amount in Stock"/>
+
+
 
         <Button
             android:text="Save Beer"
