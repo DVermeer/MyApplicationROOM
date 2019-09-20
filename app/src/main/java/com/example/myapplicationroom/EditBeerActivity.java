@@ -1,5 +1,6 @@
 package com.example.myapplicationroom;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,13 +40,25 @@ public class EditBeerActivity extends AppCompatActivity {
             String beer_index = getIntent().getStringExtra("beer_name");
             int beer_ind = parseInt(beer_index);
             Beer beer_selected = beers.get(beer_ind);
-            String beer_name = beer_selected.getBeerName();
+            final String beer_name = beer_selected.getBeerName();
             String beer_stock = beer_selected.getAmount();
             setBeernaam(beer_name, beer_stock);
 
-
+        Button biernet = findViewById(R.id.biernet);
         Button btnDrink = findViewById(R.id.btnDrink);
         final TextView beerstock = findViewById(R.id.beerstock);
+
+
+
+            biernet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(EditBeerActivity.this, BiernetActivity.class);
+                    intent.putExtra("beer_name",beer_name);
+                    startActivity(intent);
+
+                }
+            });
 
         btnDrink.setOnClickListener(new View.OnClickListener() {
 
@@ -60,7 +73,8 @@ public class EditBeerActivity extends AppCompatActivity {
                     String stock_newtext = stock_num + "";
                     beerstock.setText(stock_newtext);
                     Toast.makeText(getApplicationContext(), "Cheers, enjoy your beer", Toast.LENGTH_SHORT).show();
-
+                    // ToDo save beer stock
+                    // beers.get()
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Out of stock :( Please buy some new one", Toast.LENGTH_SHORT).show();

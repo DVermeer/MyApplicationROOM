@@ -18,19 +18,22 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class MainActivity extends AppCompatActivity implements UserAdapter.OnBeerListener {
 
     private static final String TAG = "MainActivity";
-
+    AppDatabase db;
     RecyclerView recylcerview;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-
+    List<Beer> beers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
-        List<Beer> beers = db.beerDao().getAllBeers();
+        beers = db.beerDao().getAllBeers();
 
         recylcerview.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(beers, this);
@@ -71,6 +74,15 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
         intent.putExtra("beer_name", i_beer);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onDrinkClick(View view, int adapterPosition, String new_stock) {
+       String beer_name = beers.get(adapterPosition).getBeerName();
+        Toast.makeText(getApplicationContext(), "Cheers, Enjoy your " + beer_name + "!", Toast.LENGTH_SHORT).show();
+        beers.get(adapterPosition).setAmount(new_stock);
+        //db.beerDao().updateBeers();
+        adapter.notifyDataSetChanged();
     }
 }
 

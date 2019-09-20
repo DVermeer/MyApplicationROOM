@@ -11,9 +11,13 @@ public interface BeerDao {
     @Query("SELECT * FROM beer")
     List<Beer> getAllBeers();
 
+    @Query("SELECT * FROM beer where Amount > 0")
+    List<Beer> getOnStockBeers();
+
+
     @Insert
     void insertALL(Beer... beers);
 
     @Update
-    void update(Beer... beers);
+    void updateBeers(Beer... beers);
 }

@@ -20,6 +20,7 @@ public class CreateBeer extends AppCompatActivity {
     EditText brewery;
     EditText alc_percentage;
     EditText new_amount;
+    EditText EAN_code;
 
     Button button;
 
@@ -32,6 +33,7 @@ public class CreateBeer extends AppCompatActivity {
         brewery = findViewById(R.id.brewery);
         alc_percentage = findViewById(R.id.alc_percentage);
         new_amount = findViewById(R.id.new_amount);
+        EAN_code = findViewById(R.id.EAN_code);
 
         button = findViewById(R.id.button);
 

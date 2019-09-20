@@ -1,5 +1,6 @@
 package com.example.myapplicationroom;
 
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.util.Log;
@@ -13,14 +14,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jsoup.helper.ChangeNotifyingArrayList;
+
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
 class UserAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private static final String TAG = "Beeradapter";
-    private OnBeerListener mOnBeerListener;
-    private List<Beer> beers;
+
+    public OnBeerListener mOnBeerListener;
+    public List<Beer> beers;
+    public Context context;
 
 
     public UserAdapter(List<Beer> beers, OnBeerListener onBeerListener) {
@@ -39,8 +45,8 @@ class UserAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<User
 
         holder.beerName.setText(beers.get(position).getBeerName());
         holder.brewery.setText("Brewery: " + beers.get(position).getBrewery());
-        holder.alc_percentage.setText("Alcohol percentage: " + beers.get(position).getAlc_percentage());
-        holder.amount.setText("Stock: " + beers.get(position).getAmount());
+        holder.alc_percentage.setText(beers.get(position).getAlc_percentage() + "% Alc.");
+        holder.amount.setText(beers.get(position).getAmount());
 
     }
 
@@ -57,7 +63,7 @@ class UserAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<User
             OnBeerListener onBeerListener;
             public Button btnDrink;
 
-        public ViewHolder(@NonNull View itemView, OnBeerListener onBeerListener) {
+        public ViewHolder(@NonNull View itemView, final OnBeerListener onBeerListener) {
             super(itemView);
             this.beerName = itemView.findViewById(R.id.beer_name);
             this.brewery = itemView.findViewById(R.id.brewery);
@@ -69,22 +75,21 @@ class UserAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<User
             itemView.setOnClickListener(this);
 
             btnDrink.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
-                    //Toast.makeText(getApplicationContext(), "Cheers", Toast.LENGTH_SHORT).show();
-                    // get Text from id/beerstock -> int, operate -1, set to string, set to text
+
+                    int ind = getAdapterPosition();
                     String stock = amount.getText().toString();
                     int stock_num = parseInt(stock);
                     if (stock_num > 0) {
                         stock_num = stock_num - 1;
                         String stock_newtext = stock_num + "";
                         amount.setText(stock_newtext);
-                        //Toast.makeText(this, "Cheers, enjoy your beer", Toast.LENGTH_SHORT).show();
+                          beers.get(ind).setAmount(stock_newtext);
+                          onBeerListener.onDrinkClick(view, getAdapterPosition(), stock_newtext);
 
-//                    } else {
-                        //Toast.makeText(MainActivity, "Out of stock :( Please buy some new one", Toast.LENGTH_SHORT).show();
-
+                    } else {
+                        Toast.makeText(view.getContext(), "Out of stock :( Please buy some new one", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -97,7 +102,6 @@ class UserAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<User
     }
     public interface OnBeerListener{
         void onBeerClick ( int position);
-
-
+        void onDrinkClick(View view, int adapterPosition, String stock_newtext);
     }
 }
