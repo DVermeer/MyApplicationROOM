@@ -15,25 +15,27 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/EAN_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="EAN Barcode- not finished"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/EAN_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="EAN Barcode" />
         <Button
         android:text="Check EAN"
-        android:id="@+id/checkEAN"
+        android:id="@+id/btn_checkEAN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:layout_weight="2"/>
 
         <Button
             android:text="SCAN EAN"
-            android:id="@+id/SCAN_EAN"
+            android:id="@+id/btn_scanEAN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"/>
+
+
 
 
     </LinearLayout>
@@ -65,8 +67,13 @@
 
         <Button
             android:text="Save Beer"
-            android:id="@+id/button"
+            android:id="@+id/btn_savebeer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+<!--    <SurfaceView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:id="@+id/camerapreview"/>-->
 
 </LinearLayout>

@@ -14,6 +14,9 @@ public interface BeerDao {
     @Query("SELECT * FROM beer where Amount > 0")
     List<Beer> getOnStockBeers();
 
+    @Query("SELECT * FROM beer where EAN_code=:EAN_beer")
+    Beer getBeerByEAN(String EAN_beer);
+
 
     @Insert
     void insertALL(Beer... beers);

@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
     public void onDrinkClick(View view, int adapterPosition, String new_stock) {
        String beer_name = beers.get(adapterPosition).getBeerName();
         Toast.makeText(getApplicationContext(), "Cheers, Enjoy your " + beer_name + "!", Toast.LENGTH_SHORT).show();
-        beers.get(adapterPosition).setAmount(new_stock);
+        //beers.get(adapterPosition).setAmount(new_stock);
         //db.beerDao().updateBeers();
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
 }
 

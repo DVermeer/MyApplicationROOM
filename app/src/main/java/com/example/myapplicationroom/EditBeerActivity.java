@@ -20,7 +20,7 @@ import static java.lang.Integer.*;
 public class EditBeerActivity extends AppCompatActivity {
 
     TextView beerstock;
-    //AppDatabase db;
+    AppDatabase db;
 
     private static final String TAG = "EditBeerActivity";
 

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ public class CreateBeer extends AppCompatActivity {
     EditText new_amount;
     EditText EAN_code;
 
-    Button button;
+    Button btn_savebeer, btn_checkEAN, btn_scanEAN;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,21 +35,37 @@ public class CreateBeer extends AppCompatActivity {
         alc_percentage = findViewById(R.id.alc_percentage);
         new_amount = findViewById(R.id.new_amount);
         EAN_code = findViewById(R.id.EAN_code);
-
-        button = findViewById(R.id.button);
+        btn_checkEAN = findViewById(R.id.btn_checkEAN);
+        btn_scanEAN = findViewById(R.id.btn_scanEAN);
+        btn_savebeer = findViewById(R.id.btn_savebeer);
 
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
 
-        button.setOnClickListener(new View.OnClickListener() {
+        btn_savebeer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Onclick: beerName: " + beer_name.getText().toString());
-                Beer beer = new Beer(beer_name.getText().toString(), brewery.getText().toString(), alc_percentage.getText().toString(), new_amount.getText().toString());
+                Beer beer = new Beer(beer_name.getText().toString(), brewery.getText().toString(), alc_percentage.getText().toString(), new_amount.getText().toString(), EAN_code.getText().toString());
                 db.beerDao().insertALL(beer);
 
                 startActivity(new Intent(CreateBeer.this, MainActivity.class));
+            }
+        });
+        btn_checkEAN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String EAN_beer = EAN_code.getText().toString();
+                Beer beer = db.beerDao().getBeerByEAN(EAN_beer);
+
+                Toast.makeText(getApplicationContext(), "Found " + beer.getBeerName() + "!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_scanEAN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
