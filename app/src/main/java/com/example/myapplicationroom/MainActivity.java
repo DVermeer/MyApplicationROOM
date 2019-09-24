@@ -29,11 +29,12 @@ import static java.lang.Integer.parseInt;
 public class MainActivity extends AppCompatActivity implements UserAdapter.OnBeerListener {
 
     private static final String TAG = "MainActivity";
-    AppDatabase db;
+    List<Beer> beers;
     RecyclerView recylcerview;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-    List<Beer> beers;
+    AppDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,10 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
 
         recylcerview = findViewById(R.id.recycler_view);
 
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
-        beers = db.beerDao().getAllBeers();
+        beers = db.beerDao().getOnStockBeers();
 
         recylcerview.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(beers, this);
@@ -78,11 +79,16 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
 
     @Override
     public void onDrinkClick(View view, int adapterPosition, String new_stock) {
-       String beer_name = beers.get(adapterPosition).getBeerName();
-        Toast.makeText(getApplicationContext(), "Cheers, Enjoy your " + beer_name + "!", Toast.LENGTH_SHORT).show();
-        //beers.get(adapterPosition).setAmount(new_stock);
-        //db.beerDao().updateBeers();
-        //adapter.notifyDataSetChanged();
+       Beer beer_name = beers.get(adapterPosition);
+        Toast.makeText(getApplicationContext(), "Cheers, Enjoy your " + beer_name.getAmount() + "!", Toast.LENGTH_SHORT).show();
+        beer_name.setAmount(new_stock);
+
+        // ToDo classify db elsewhere globally so this become redundant
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+        db.beerDao().updateBeers(beer_name);
+        adapter.notifyDataSetChanged();
     }
 }
 
