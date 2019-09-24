@@ -57,6 +57,9 @@ public class CreateBeer extends AppCompatActivity implements Dialog_eanscanned.D
                 } else {
                     Toast.makeText(getApplicationContext(), "Found: " + beer.getBeerName() + "!", Toast.LENGTH_SHORT).show();
                     //openDialog();
+                    beer_name.setText(beer.getBeerName());
+                    brewery.setText(beer.getBrewery());
+                    alc_percentage.setText(beer.getAlc_percentage());
                 }
             }
 
@@ -89,6 +92,8 @@ public class CreateBeer extends AppCompatActivity implements Dialog_eanscanned.D
                     } else {
                         Toast.makeText(getApplicationContext(), "Found " + beer.getBeerName() + "!", Toast.LENGTH_SHORT).show();
                         //openDialog();
+
+
                     }
                 }
             }
@@ -106,7 +111,7 @@ public class CreateBeer extends AppCompatActivity implements Dialog_eanscanned.D
         dialog_eanscanned.show(getSupportFragmentManager(),"Beer Dialog");
 
     }
-    @Override
+    //@Override
     public void applyTexts(String new_stock) {
         new_amount.setText(new_stock);
     }

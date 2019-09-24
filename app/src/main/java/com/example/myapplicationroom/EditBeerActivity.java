@@ -33,7 +33,7 @@ public class EditBeerActivity extends AppCompatActivity {
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
                 .allowMainThreadQueries()
                 .build();
-        List<Beer> beers = db.beerDao().getAllBeers();
+        List<Beer> beers = db.beerDao().getOnStockBeers();
 
         Log.d(TAG, "onCreate: Called");
         if (getIntent().hasExtra("beer_name")) {

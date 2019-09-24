@@ -1,14 +1,10 @@
 package com.example.myapplicationroom;
 
 import android.content.Context;
-import android.content.Intent;
-import android.nfc.Tag;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +82,7 @@ class UserAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<User
                         String stock_newtext = stock_num + "";
                         amount.setText(stock_newtext);
                           beers.get(ind).setAmount(stock_newtext);
+
                           onBeerListener.onDrinkClick(view, getAdapterPosition(), stock_newtext);
 
                     } else {

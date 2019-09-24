@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
     @Override
     public void onDrinkClick(View view, int adapterPosition, String new_stock) {
        Beer beer_name = beers.get(adapterPosition);
-        Toast.makeText(getApplicationContext(), "Cheers, Enjoy your " + beer_name.getAmount() + "!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Cheers, Enjoy your " + beer_name.getBeerName() + "!", Toast.LENGTH_SHORT).show();
         beer_name.setAmount(new_stock);
 
         // ToDo classify db elsewhere globally so this become redundant

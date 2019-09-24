@@ -7,12 +7,13 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Beer {
 
-    public Beer(String beerName, String brewery, String alc_percentage, String amount, String EAN_code          ) {
+    public Beer(String beerName, String brewery, String alc_percentage, String amount, String EAN_code    ) {
         this.beerName = beerName;
         this.brewery = brewery;
         this.alc_percentage = alc_percentage;
         this.amount = amount;
         this.EAN_code = EAN_code;
+//        this.drunk_amount = drunk_amount; // Also incluse in Beer above
     }
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -31,6 +32,9 @@ public class Beer {
 
     @ColumnInfo(name = "EAN_code")
     private String EAN_code;
+
+//    @ColumnInfo(name = "drunk_amount")
+//    private String drunk_amount;
 
 
     public int getId() {
@@ -72,4 +76,8 @@ public class Beer {
     public String getEAN_code() { return EAN_code;    }
 
     public void setEAN_code(String EAN_code) { this.EAN_code = EAN_code;    }
+
+//    public String getDrunk_amount() {return drunk_amount;  }
+//
+//    public void setDrunk_amount(String drunk_amount) { this.drunk_amount = drunk_amount;  }
 }
