@@ -1,6 +1,6 @@
 package com.example.myapplicationroom;
 
-//import android.app.AlertDialog;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.room.Room;
 
 public class Dialog_eanscanned extends AppCompatDialogFragment {
     private EditText editText;
@@ -33,11 +33,12 @@ public class Dialog_eanscanned extends AppCompatDialogFragment {
                 })
                 .setPositiveButton("Add Beer", new DialogInterface.OnClickListener(){
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i){
-                        String new_amount = editText.getText().toString();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String new_count = editText.getText().toString();
+
                     }
-                })
-                .show();
+                });
+
 
         editText = view.findViewById(R.id.new_amount);
 
@@ -56,7 +57,7 @@ public class Dialog_eanscanned extends AppCompatDialogFragment {
     }
 
     public interface DialogListener {
-        void applyTexts(String new_amount);
+        void applyTexts(String new_count);
     }
 
 }

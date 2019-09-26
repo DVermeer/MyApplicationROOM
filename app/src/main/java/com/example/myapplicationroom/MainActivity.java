@@ -88,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.OnBee
                 .allowMainThreadQueries()
                 .build();
         db.beerDao().updateBeers(beer_name);
-        adapter.notifyDataSetChanged();
+
+
     }
 }
 
